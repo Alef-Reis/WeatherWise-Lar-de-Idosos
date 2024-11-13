@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WeatherWise Lar de Idosos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='sign-in.css') }}" rel="stylesheet">
+</head>
+<body class="custom-background">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light h5">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="nav nav-pills nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" aria-current="page" href="{{ url_for('painel') }}">Painel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ url_for('update_coordinator') }}">Minhas Informações</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ url_for('idoso_registrar') }}">Registrar Idoso</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ url_for('logout') }}">Sair</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-3">
+        <main class="form-signin w-100 m-auto">
+            <div class="container pt-3">
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <div class="alert alert-{{category}}">{{message}}</div>      
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block body %}
+                {% endblock %}
+            </div>
+            <form method="post" action="{{ url_for('idoso_registrar') }}">
+                <div class="form-group">
+                    <label for="nome_idoso">Nome do Idoso:</label>
+                    <input type="text" class="form-control" id="nome_idoso" placeholder="Digite o nome do idoso" name="nome_idoso" required>
+                </div>
+                <div class="form-group">
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" required>
+                </div>
+                <div class="form-group">
+                    <label for="cpf_idoso">CPF do Idoso:</label>
+                    <input type="text" class="form-control" id="cpf_idoso" placeholder="Digite o CPF do idoso" name="cpf_idoso" required>
+                </div>
+                <div class="form-group">
+                    <label for="rg_idoso">RG do Idoso:</label>
+                    <input type="text" class="form-control" id="rg_idoso" placeholder="Digite o RG do idoso" name="rg_idoso" required>
+                </div>
+                <div class="form-group">
+                    <label for="cartao_sus">Cartão SUS:</label>
+                    <input type="text" class="form-control" id="cartao_sus" placeholder="Digite o número do cartão SUS" name="cartao_sus" required>
+                </div>
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço" name="endereco" required>
+                </div>
+                <div class="form-group">
+                    <label for="complemento">Complemento:</label>
+                    <input type="text" class="form-control" id="complemento" placeholder="Digite o complemento" name="complemento">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone" name="telefone" required>
+                </div>
+                <div class="form-group">
+                    <label for="nome_responsavel">Nome do Responsável:</label>
+                    <input type="text" class="form-control" id="nome_responsavel" placeholder="Digite o nome do responsável" name="nome_responsavel" required>
+                </div>
+                <div class="form-group">
+                    <label for="rg_responsavel">RG do Responsável:</label>
+                    <input type="text" class="form-control" id="rg_responsavel" placeholder="Digite o RG do responsável" name="rg_responsavel" required>
+                </div>
+                <div class="form-group">
+                    <label for="cpf_responsavel">CPF do Responsável:</label>
+                    <input type="text" class="form-control" id="cpf_responsavel" placeholder="Digite o CPF do responsável" name="cpf_responsavel" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone_responsavel">Telefone do Responsável:</label>
+                    <input type="text" class="form-control" id="telefone_responsavel" placeholder="Digite o telefone do responsável" name="telefone_responsavel" required>
+                </div>
+                <button type="submit" class="mt-2 btn btn-primary">Registrar</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
